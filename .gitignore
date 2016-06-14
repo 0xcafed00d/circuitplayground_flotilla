@@ -1,24 +1,37 @@
-# Compiled Object files, Static and Dynamic libs (Shared Objects)
+# Compiled Object files
+*.slo
+*.lo
 *.o
-*.a
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
 *.so
+*.dylib
+*.dll
 
-# Folders
-_obj
-_test
+# Fortran module files
+*.mod
 
-# Architecture specific extensions/prefixes
-*.[568vq]
-[568vq].out
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
 
-*.cgo1.go
-*.cgo2.c
-_cgo_defun.c
-_cgo_gotypes.go
-_cgo_export.*
-
-_testmain.go
-
+# Executables
 *.exe
-*.test
-*.prof
+*.out
+*.app
+
+libraries/*
+
+#platformio files
+.pioenvs
+.sconsign.dblite
+.idea
+.travis.yml
+.vscode
