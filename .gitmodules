@@ -1,0 +1,3 @@
+[submodule "lib/arduino_lib_flotilla"]
+	path = lib/arduino_lib_flotilla
+	url = http://github.com/simulatedsimian/arduino_lib_flotilla
