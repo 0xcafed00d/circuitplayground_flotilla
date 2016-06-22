@@ -1,0 +1,8 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "clang.cxxflags": [
+        "-I${workspaceRoot}/lib/Adafruit_CircuitPlayground",
+        "-I${workspaceRoot}/lib/arduino_lib_flotilla",
+        "-I${workspaceRoot}/.pioenvs/feather32u4/FrameworkArduino"
+    ]
+}

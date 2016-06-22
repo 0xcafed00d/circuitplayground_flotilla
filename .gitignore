@@ -34,4 +34,5 @@ libraries/*
 .sconsign.dblite
 .idea
 .travis.yml
-.vscode
+.vscode/.browse.VC.db
+.idea
