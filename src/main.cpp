@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
-#include <dock.h>
-#include <modulerainbow.h>
+#include <lib_flotilla.h>
 
 class CPGModuleRainbow : public ModuleRainbow {
   public:
@@ -17,9 +16,28 @@ class CPGModuleRainbow : public ModuleRainbow {
 	int m_offset;
 };
 
+class CPGModuleButtons : public ModuleTouch {
+  protected:
+	virtual uint8_t GetState() {
+		uint8_t state = 0;
+
+		if (CircuitPlayground.leftButton())
+			state |= 1;
+
+		if (CircuitPlayground.rightButton())
+			state |= 2;
+
+		if (CircuitPlayground.slideSwitch())
+			state |= 4;
+
+		return state;
+	}
+};
+
 Dock dock;
 CPGModuleRainbow rainbow1(0);
 CPGModuleRainbow rainbow2(5);
+CPGModuleButtons touch1;
 
 void setup() {
 	CircuitPlayground.begin();
@@ -29,8 +47,11 @@ void setup() {
 
 	rainbow1.Init(1);
 	rainbow2.Init(2);
+	touch1.Init(3);
+
 	dock.AddModule(&rainbow1);
 	dock.AddModule(&rainbow2);
+	dock.AddModule(&touch1);
 }
 
 void loop() {
