@@ -34,10 +34,19 @@ class CPGModuleButtons : public ModuleTouch {
 	}
 };
 
+class CPGModuleLight : public ModuleLight {
+  protected:
+	virtual void GetState(uint16_t& visible, uint16_t& ir) {
+		visible = CircuitPlayground.lightSensor();
+		ir = visible;
+	}
+};
+
 Dock dock;
 CPGModuleRainbow rainbow1(0);
 CPGModuleRainbow rainbow2(5);
 CPGModuleButtons touch1;
+CPGModuleLight light;
 
 void setup() {
 	CircuitPlayground.begin();
@@ -48,10 +57,12 @@ void setup() {
 	rainbow1.Init(1);
 	rainbow2.Init(2);
 	touch1.Init(3);
+	light.Init(4);
 
 	dock.AddModule(&rainbow1);
 	dock.AddModule(&rainbow2);
 	dock.AddModule(&touch1);
+	dock.AddModule(&light);
 }
 
 void loop() {
