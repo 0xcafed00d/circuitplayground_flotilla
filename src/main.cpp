@@ -42,11 +42,24 @@ class CPGModuleLight : public ModuleLight {
 	}
 };
 
+class CPGModuleMotion : public ModuleMotion {
+  protected:
+	virtual void GetState(Vector& accel, Vector& mag) {
+		float x = CircuitPlayground.motionX();
+		float y = CircuitPlayground.motionY();
+		float z = CircuitPlayground.motionZ();
+
+		accel = Vector{int16_t(x * 4096), int16_t(y * 4096), int16_t(z * 4096)};
+		mag = Vector{0, 0, 0};
+	}
+};
+
 Dock dock;
 CPGModuleRainbow rainbow1(0);
 CPGModuleRainbow rainbow2(5);
 CPGModuleButtons touch1;
 CPGModuleLight light;
+CPGModuleMotion motion;
 
 void setup() {
 	CircuitPlayground.begin();
@@ -58,11 +71,13 @@ void setup() {
 	rainbow2.Init(2);
 	touch1.Init(3);
 	light.Init(4);
+	motion.Init(5);
 
 	dock.AddModule(&rainbow1);
 	dock.AddModule(&rainbow2);
 	dock.AddModule(&touch1);
 	dock.AddModule(&light);
+	dock.AddModule(&motion);
 }
 
 void loop() {
