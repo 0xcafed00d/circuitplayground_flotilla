@@ -36,9 +36,10 @@ class CPGModuleButtons : public ModuleTouch {
 
 class CPGModuleLight : public ModuleLight {
   protected:
-	virtual void GetState(uint16_t& visible, uint16_t& ir) {
+	virtual void GetState(uint16_t& visible, uint16_t& ir, uint16_t& lux) {
 		visible = CircuitPlayground.lightSensor();
 		ir = visible;
+		lux = visible;
 	}
 };
 
