@@ -45,13 +45,13 @@ class CPGModuleLight : public ModuleLight {
 
 class CPGModuleMotion : public ModuleMotion {
   protected:
-	virtual void GetState(Vector& accel, Vector& mag) {
+	virtual void GetState(Vector<int16_t>& accel, Vector<int16_t>& mag) {
 		float x = CircuitPlayground.motionX();
 		float y = CircuitPlayground.motionY();
 		float z = CircuitPlayground.motionZ();
 
-		accel = Vector{int16_t(x * 4096), int16_t(y * 4096), int16_t(z * 4096)};
-		mag = Vector{0, 0, 0};
+		accel = Vector<int16_t>{int16_t(x * 4096), int16_t(y * 4096), int16_t(z * 4096)};
+		mag = Vector<int16_t>{0, 0, 0};
 	}
 };
 
