@@ -3,7 +3,7 @@
     "clang.cxxflags": [
         "-I${workspaceRoot}/lib/Adafruit_CircuitPlayground",
         "-I${workspaceRoot}/lib/arduino_lib_flotilla",
-        "-I${workspaceRoot}/.pioenvs/feather32u4/FrameworkArduino"
+        "-I${workspaceRoot}/.pioenvs/circuitplay32u4/FrameworkArduino"
     ],
 
     // Run 'clang-format' on save.
