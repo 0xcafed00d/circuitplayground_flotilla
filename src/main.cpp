@@ -82,7 +82,9 @@ void setup() {
 }
 
 void loop() {
-	dock.Update(&Serial);
-	dock.ProcessInput(&Serial);
-	delay(10);
+	Serial.println(CircuitPlayground.readCap(1));
+
+	// dock.Update(&Serial);
+	// dock.ProcessInput(&Serial);
+	delay(100);
 }
