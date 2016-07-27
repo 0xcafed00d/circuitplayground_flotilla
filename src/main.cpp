@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Adafruit_CircuitPlayground.h>
 #include <lib_flotilla.h>
+#include <avr/eeprom.h>
 
 class CPGModuleRainbow : public ModuleRainbow {
   public:
@@ -14,6 +15,47 @@ class CPGModuleRainbow : public ModuleRainbow {
 
   private:
 	int m_offset;
+};
+
+struct ArduinoSerialStream : public SerialStream {
+	virtual bool available() {
+		return Serial.available();
+	}
+
+	virtual int read() {
+		return Serial.read();
+	}
+
+	virtual void write(int c) {
+		Serial.write(c);
+	}
+
+	virtual void print(int v) {
+		Serial.print(v);
+	}
+
+	virtual void print(const char* s) {
+		Serial.print(s);
+	}
+};
+
+struct ArduinoTimerUtil : public TimerUtil {
+	virtual TimeOut make(uint32_t timeout) {
+		return TimeOut{(uint32_t)millis() + timeout};
+	}
+	virtual bool hasTimedOut(TimeOut& t) {
+		return millis() > t.end;
+	}
+};
+
+struct ArduinoPersistantStore : public PersistantStore {
+	virtual void writeBlock(void* data, int offset, size_t len) {
+		eeprom_write_block(data, (void*)offset, len);
+	}
+
+	virtual void readBlock(void* data, int offset, size_t len) {
+		eeprom_read_block(data, (void*)offset, len);
+	}
 };
 
 class CPGModuleButtons : public ModuleTouch {
@@ -86,7 +128,9 @@ class CPGModuleMotion : public ModuleMotion {
 	}
 };
 
-Dock dock;
+ArduinoTimerUtil timerUtil;
+ArduinoPersistantStore persistantStore;
+Dock dock(&timerUtil, &persistantStore);
 CPGModuleRainbow rainbow1(0);
 CPGModuleRainbow rainbow2(5);
 CPGModuleButtons touch1;
@@ -115,8 +159,10 @@ void setup() {
 	dock.AddModule(&touch2);
 }
 
+ArduinoSerialStream serialstream;
+
 void loop() {
-	dock.Update(&Serial);
-	dock.ProcessInput(&Serial);
+	dock.Update(&serialstream);
+	dock.ProcessInput(&serialstream);
 	delay(100);
 }
