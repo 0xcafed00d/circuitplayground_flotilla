@@ -1,4 +1,4 @@
-[submodule "lib/arduino_lib_flotilla"]
+[submodule "lib/libflotilla"]
 	path = lib/libflotilla
 	url = http://github.com/simulatedsimian/libflotilla
 [submodule "lib/Adafruit_CircuitPlayground"]
