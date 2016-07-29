@@ -162,7 +162,14 @@ void setup() {
 ArduinoSerialStream serialstream;
 
 void loop() {
-	dock.Update(&serialstream);
-	dock.ProcessInput(&serialstream);
+	static bool led = false;
+
+	if (Serial) {
+		CircuitPlayground.redLED(led);
+		led = !led;
+		dock.Update(&serialstream);
+		dock.ProcessInput(&serialstream);
+	}
+
 	delay(100);
 }
