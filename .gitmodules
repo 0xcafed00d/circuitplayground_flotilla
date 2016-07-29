@@ -1,6 +1,6 @@
 [submodule "lib/Adafruit_CircuitPlayground"]
 	path = lib/Adafruit_CircuitPlayground
 	url = https://github.com/adafruit/Adafruit_CircuitPlayground
-[submodule "libflotilla"]
-	path = libflotilla
+[submodule "lib/libflotilla"]
+	path = lib/libflotilla
 	url = https://github.com/simulatedsimian/libflotilla
