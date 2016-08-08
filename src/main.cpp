@@ -144,13 +144,6 @@ void setup() {
 	while (!Serial) {
 	}
 
-	rainbow1.Init(1);
-	rainbow2.Init(2);
-	touch1.Init(3);
-	light.Init(4);
-	motion.Init(5);
-	touch2.Init(6);
-
 	dock.AddModule(&rainbow1);
 	dock.AddModule(&rainbow2);
 	dock.AddModule(&touch1);
